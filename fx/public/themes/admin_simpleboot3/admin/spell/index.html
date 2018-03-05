@@ -1,0 +1,47 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:url('Spell/index')}">联系时间段列表</a></li>
+			<li><a href="{:url('Spell/add')}">添加联系时间段</a></li>
+		</ul>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th width="40">ID</th>
+						<th align="left">开始时间</th>
+						<th align="left">结束时间</th>
+						<th width="50s" align="left">{:lang('STATUS')}</th>
+						<th width="150" align="left">创建时间</th>
+						<th width="150" align="left">修改时间</th>
+						<th width="160">{:lang('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data" item="vo">
+					<tr>
+						<td>{$vo.id}</td>
+						<td>{:date('H:i',$vo.start_time)}</td>
+						<td>{:date('H:i',$vo.end_time)}</td>
+						<td>
+							<if condition="$vo['status'] eq 1">
+								<font color="red">√</font>
+							<else /> 
+								<font color="red">╳</font>
+							</if>
+						</td>
+						<td>{:date('Y-m-d H:i:s',$vo.create_time)}</td>
+						<td>{:date('Y-m-d H:i:s',$vo.update_time)}</td>
+						<td>
+							<a href="{:url('Spell/edit',array('id'=>$vo['id']))}">{:lang('EDIT')}</a>
+							<a class="js-ajax-delete" href="{:url('Spell/delete',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
+						</td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

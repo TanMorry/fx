@@ -1,0 +1,46 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+	<ul class="nav nav-tabs">
+		<li><a href="{:url('Spell/index')}">规模列表</a></li>
+		<li><a href="{:url('Spell/add')}">添加规模</a></li>
+		<li class="active"><a>编辑规模</a></li>
+	</ul>
+	<form class="form-horizontal js-ajax-form margin-top-20" action="{:url('Spell/edit_post')}" method="post">
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>联系时间段</label>
+			<div class="col-md-6 col-sm-10">
+				<php>
+					$starttime=date("Y-m-d H:i",$data['start_time']);
+					$endtime=date("Y-m-d H:i",$data['end_time']);
+				</php>
+				<input type="text" class="form-control js-bootstrap-datetime" name="start_time" value="{$starttime}" style="width: 140px;" autocomplete="off">-<input type="text" class="form-control js-bootstrap-datetime" name="end_time"  value="{$endtime}"  style="width: 140px;" autocomplete="off">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">{:lang('STATUS')}</label>
+			<div class="col-md-6 col-sm-10">
+				<label class="radio-inline">
+					<php>$active_true_checked=($data['status']==1)?"checked":"";</php>
+					<input type="radio" name="status" value="1" {$active_true_checked}> {:lang('ENABLED')}
+				</label>
+				<label class="radio-inline">
+					<php>$active_false_checked=($data['status']==0)?"checked":"";</php>
+					<input type="radio" name="status" value="0" {$active_false_checked}> {:lang('DISABLED')}
+				</label>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<input type="hidden" name="id" value="{$data.id}"/>
+				<button type="submit" class="btn btn-primary ">{:lang('ADD')}</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

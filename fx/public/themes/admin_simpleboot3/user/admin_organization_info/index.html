@@ -1,0 +1,52 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('AdminOrganizationInfo/index')}">机构信息列表</a></li>
+    </ul>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th width="40">ID</th>
+            <th>幼儿园名称</th>
+            <th>姓名</th>
+            <th width="80">手机号码</th>
+            <th>身份</th>
+            <th>联系时间段</th>
+            <th>幼儿园规模</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
+            <th width="160">{:lang('ACTIONS')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="organization_info" item="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.organization}</td>
+                <td>{$vo.name}</td>
+                <td>{$vo.phone}</td>
+                <td>
+                    {$vo.identity_name}
+                </td>
+                <td>
+                    {:date('H:i',$vo.start_time)} - {:date('H:i',$vo.end_time)}
+                </td>
+                <td>
+                    {$vo.scname}
+                </td>
+                <td>{:date('Y-m-d H:i:s',$vo.create_time)}</td>
+                <td>{:date('Y-m-d H:i:s',$vo.update_time)}</td>
+                <td>
+                    <a href="{:url('AdminOrganizationInfo/edit',array('id'=>$vo['id']))}">{:lang('EDIT')}</a>
+                    <a class="js-ajax-delete" href="{:url('AdminOrganizationInfo/delete',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
